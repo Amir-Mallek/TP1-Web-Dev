@@ -1,7 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { Todo } from '../model/todo';
+import { Component, signal } from '@angular/core';
 import { TodoService } from '../service/todo.service';
-
+import { TodoStatus } from '../model/todo';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -13,19 +12,18 @@ import { FormsModule } from '@angular/forms';
     imports: [FormsModule],
 })
 export class TodoComponent {
-  private todoService = inject(TodoService);
+  name = signal('');
+  content = signal('');
 
-  todos: Todo[] = [];
-  todo = new Todo();
-  constructor() {
-    this.todos = this.todoService.getTodos();
-  }
+  constructor(public todoService: TodoService) {}
+
   addTodo() {
-    this.todoService.addTodo(this.todo);
-    this.todo = new Todo();
+    this.todoService.addTodo(this.name(), this.content());
+    this.name.set('');
+    this.content.set('');
   }
 
-  deleteTodo(todo: Todo) {
-    this.todoService.deleteTodo(todo);
+  changeStatus(id: number, status: TodoStatus) {
+    this.todoService.changeStatus(id, status);
   }
 }
