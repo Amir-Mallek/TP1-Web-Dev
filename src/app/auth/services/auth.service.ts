@@ -1,9 +1,10 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { CredentialsDto } from '../dto/credentials.dto';
 import { LoginResponseDto } from '../dto/login-response.dto';
 import { HttpClient } from '@angular/common/http';
 import { API } from '../../../config/api.config';
 import { Observable } from 'rxjs';
+import { UserDto } from '../dto/user.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -11,16 +12,27 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private http = inject(HttpClient);
 
+  isAuthenticated = computed(() => this.token() !== null);
+
+  token = signal<string | null>(localStorage.getItem('token'));
+  currentUser = computed<UserDto | null>(() => {
+    console.log('AuthService: fetching current user');
+    if (!this.isAuthenticated()) {
+      return null;
+    }
+    const userString = localStorage.getItem('user');
+    if (userString) {
+      return JSON.parse(userString) as UserDto;
+    }
+    return null;
+  });
 
   login(credentials: CredentialsDto): Observable<LoginResponseDto> {
     return this.http.post<LoginResponseDto>(API.login, credentials);
   }
 
-  isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
-  }
-
   logout() {
+    this.token.set(null);
     localStorage.removeItem('token');
   }
 }
