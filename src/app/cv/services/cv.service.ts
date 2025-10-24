@@ -51,11 +51,10 @@ export class CvService {
    * supprime un cv par son id de l'API
    *
    * @param id: number
-   * @returns CV[]
    *
    */
-  deleteCvById(id: number): Observable<any> {
-    return this.http.delete<any>(API.cv + id);
+  deleteCvById(id: number): Observable<void> {
+    return this.http.delete<void>(API.cv + id);
   }
 
   addCv(cv: Cv): Observable<Cv> {
