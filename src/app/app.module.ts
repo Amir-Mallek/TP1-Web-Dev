@@ -51,7 +51,6 @@ import { ProductsComponent } from "./products/products.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { AutocompleteComponent } from "./cv/autocomplete/autocomplete.component";
 import { SliderComponent } from "./rxjs/slider/slider.component";
-import { TtcComponent } from "src/app/components/ttc/ttc.component";
 
 @NgModule({
   declarations: [
@@ -106,7 +105,6 @@ import { TtcComponent } from "src/app/components/ttc/ttc.component";
       // or after 30 seconds (whichever comes first).
       registrationStrategy: "registerWhenStable:30000",
     }),
-    TtcComponent
   ],
   providers: [
     AuthInterceptorProvider,
