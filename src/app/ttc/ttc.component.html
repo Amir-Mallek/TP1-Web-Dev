@@ -1,0 +1,61 @@
+<div class="container mt-4 p-4 border rounded shadow-sm bg-light">
+  <h4 class="mb-4">TTC Calculator</h4>
+
+  <!-- Input row -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <input
+        type="number"
+        class="form-control"
+        placeholder="Prix HT"
+        [value]="PriceHT()"
+        (input)="PriceHT.set($any($event.target).valueAsNumber)"
+      />
+    </div>
+
+    <div class="col-md-4">
+      <input
+        type="number"
+        class="form-control"
+        placeholder="Quantité"
+        [value]="Quantity()"
+        (input)="Quantity.set($any($event.target).valueAsNumber)"
+      />
+    </div>
+
+    <div class="col-md-4">
+      <input
+        type="number"
+        class="form-control"
+        placeholder="TVA (%)"
+        [value]="TVA()"
+        (input)="TVA.set($any($event.target).valueAsNumber)"
+      />
+    </div>
+  </div>
+
+  <!-- Output row -->
+  <div class="row text-center">
+    <div class="col-md-4 p-3 bg-info text-white rounded-2">
+      <strong>Prix unitaire TTC:</strong>
+      <br />
+      <span>{{ PriceHT() * (1 + TVA() / 100) | number : "1.2-2" }}$</span>
+    </div>
+
+    <div class="col-md-4 p-3 bg-success text-white rounded-2">
+      <strong>Prix total TTC:</strong>
+      <br />
+      <span
+        >{{
+          PriceHT() * Quantity() * (1 + TVA() / 100) | number : "1.2-2"
+        }}$</span
+      >
+    </div>
+
+    <div class="col-md-4 p-3 bg-danger text-white rounded-2">
+      <strong>Discount:</strong>
+      <br />
+      <span>0.00$</span>
+    </div>
+  </div>
+</div>
