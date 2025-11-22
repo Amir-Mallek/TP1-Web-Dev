@@ -12,13 +12,8 @@
   <input type="text" class="form-control" formControlName="firstname" /> Age:
   <input type="text" class="form-control" formControlName="age" /> Cin:
   <input type="text" class="form-control" formControlName="cin" />
-  <div
-    *ngIf="
-      form.errors && form.errors['cinFirstCars'] && cin?.touched && age?.touched
-    "
-    class="alert alert-danger"
-  >
-    Cette Cin est invalide
+  <div *ngIf="cinErrorMessage" class="alert alert-danger">
+    {{ cinErrorMessage }}
   </div>
   Job: <input type="text" class="form-control" formControlName="job" /> Path:
   <input type="text" class="form-control" formControlName="path" />

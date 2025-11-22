@@ -1,6 +1,7 @@
 <ol class="list-group">
   <li
     *ngFor="let cv of cvs; let isOdd = odd"
+    (click)="onCvClick(cv)"
     [ngClass]="{
       'list-group-item-primary': isOdd,
       'list-group-item-secondary': !isOdd
