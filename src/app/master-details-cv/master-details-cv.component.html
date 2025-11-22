@@ -1,0 +1,49 @@
+<div class="row m-3">
+
+  <div class="col-4">
+    <app-list
+      [cvs]="cvs"
+      (selectCv)="selectCv($event)"
+    ></app-list>
+  </div>
+
+  <div class="col-8" *ngIf="selectedCv">
+    <div class="card p-3">
+
+      <h4 class="text-center">
+        Cv {{ selectedCv.firstname }} {{ selectedCv.name }}
+      </h4>
+
+      <div class="text-center">
+        <img
+          [src]="'assets/images/' + (selectedCv.path | defaultImage)"
+          width="150"
+          height="150"
+          class="rounded-circle"
+        />
+      </div>
+
+      <h4 class="mt-3">Informations</h4>
+
+      <table class="table table-striped">
+        <tr>
+          <td><strong>Name:</strong> {{ selectedCv.name }}</td>
+        </tr>
+        <tr>
+          <td><strong>Firstname:</strong> {{ selectedCv.firstname }}</td>
+        </tr>
+        <tr>
+          <td><strong>Job:</strong> {{ selectedCv.job }}</td>
+        </tr>
+        <tr>
+          <td><strong>Age:</strong> {{ selectedCv.age }}</td>
+        </tr>
+        <tr>
+          <td><strong>CIN:</strong> {{ selectedCv.cin }}</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+
+</div>

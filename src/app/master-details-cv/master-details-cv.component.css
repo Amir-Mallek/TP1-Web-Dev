@@ -1,0 +1,29 @@
+.master-detail-container {
+  display: flex;
+  gap: 20px;
+}
+
+.master {
+  width: 40%;
+  border-right: 2px solid #ccc;
+  padding-right: 20px;
+}
+
+.detail {
+  width: 60%;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  cursor: pointer;
+  padding: 8px;
+  list-style: none;
+}
+
+li.selected {
+  background: #1976d2;
+  color: white;
+}
