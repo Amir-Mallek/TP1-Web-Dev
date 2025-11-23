@@ -21,9 +21,24 @@
     Cette Cin est invalide
   </div>
   Job: <input type="text" class="form-control" formControlName="job" /> Path:
-  <input type="text" class="form-control" formControlName="path" />
+  <input 
+    type="text" 
+    class="form-control" 
+    formControlName="path" 
+    [disabled]="age.value && age.value < 18"
+    [title]="age.value && age.value < 18 ? 'Les mineurs ne peuvent pas renseigner d\'image' : ''"
+  />
+  <div 
+    *ngIf="age.value && age.value < 18" 
+    class="alert alert-info mt-2"
+  >
+    <small>
+      <i class="fa fa-info-circle"></i> 
+      Mineur 
+    </small>
+  </div>
 
-  <button [disabled]="form.invalid" class="btn btn-primary" (click)="addCv()">
+  <button [disabled]="form.invalid" class="btn btn-primary mt-3" (click)="addCv()">
     add cv
   </button>
 </form>
