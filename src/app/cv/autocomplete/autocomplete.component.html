@@ -1,3 +1,52 @@
 <form [formGroup]="form">
-  <input type="text" class="form-control" formControlName="search" />
+  <div class="position-relative">
+    <div class="input-group">
+      <input 
+        type="text" 
+        class="form-control" 
+        formControlName="search" 
+        placeholder="Rechercher un CV par nom..."
+      />
+    </div>
+
+    <div 
+      *ngIf="showResults && results.length > 0" 
+      class="position-absolute w-100 mt-1"
+      style="z-index: 1000;"
+    >
+      <ul class="list-group shadow">
+        <li 
+          *ngFor="let cv of results" 
+          class="list-group-item list-group-item-action"
+          (click)="selectCv(cv)"
+          style="cursor: pointer;"
+        >
+          <div class="d-flex align-items-center">
+            <img 
+              [src]="'assets/images/' + (cv.path | defaultImage)" 
+              [alt]="cv.firstname + ' ' + cv.name"
+              class="rounded-circle me-3"
+              style="width: 40px; height: 40px; object-fit: cover;"
+            />
+            <div>
+              <strong class="d-block">{{ cv.firstname }} {{ cv.name }}</strong>
+              <small class="text-muted">{{ cv.job }}</small>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div 
+      *ngIf="showResults && results.length === 0 && search.value && search.value.trim().length >= 2" 
+      class="position-absolute w-100 mt-1"
+      style="z-index: 1000;"
+    >
+      <div class="list-group shadow">
+        <div class="list-group-item text-center text-muted">
+          Aucun résultat trouvé
+        </div>
+      </div>
+    </div>
+  </div>
 </form>
