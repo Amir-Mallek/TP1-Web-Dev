@@ -1,14 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {User, UsersService} from "../users.service";
+import { Component, OnInit } from '@angular/core';
+import { User, UsersService } from "../users.service";
 import * as ChartJs from 'chart.js/auto';
+import { List } from 'immutable';
 @Component({
   selector: 'app-rh',
   templateUrl: './rh.component.html',
-  styleUrls: ['./rh.component.css']
+  styleUrls: ['./rh.component.css'],
 })
 export class RhComponent implements OnInit {
-  oddUsers: User[];
-  evenUsers: User[];
+  oddUsers: List<User>;
+  evenUsers: List<User>;
+  userFullNameEven: string = '';
+  userFullNameOdd: string = '';
   chart: any;
   constructor(private userService: UsersService) {
     this.oddUsers = this.userService.getOddOrEven(true);
@@ -16,28 +19,31 @@ export class RhComponent implements OnInit {
   }
 
   ngOnInit(): void {
-        this.createChart();
-    }
-  addUser(list: User[], newUser: string) {
-    this.userService.addUser(list, newUser);
+    this.createChart();
   }
-  createChart(){
+  addEvenUser(list: List<User>, newUser: string) {
+    this.evenUsers = this.userService.addUser(list, newUser);
+  }
+  addOddUser(list: List<User>, newUser: string) {
+    this.oddUsers = this.userService.addUser(list, newUser);
+  }
+  createChart() {
     const data = [
-      { users: 'Workers', count: this.oddUsers.length },
-      { users: 'Boss', count: this.evenUsers.length },
+      { users: 'Workers', count: this.oddUsers.size },
+      { users: 'Boss', count: this.evenUsers.size },
     ];
     this.chart = new ChartJs.Chart("MyChart",
-    {
-      type: 'bar',
+      {
+        type: 'bar',
         data: {
           labels: data.map(row => row.users),
-        datasets: [
-        {
-          label: 'Entreprise stats',
-          data: data.map(row => row.count)
+          datasets: [
+            {
+              label: 'Entreprise stats',
+              data: data.map(row => row.count)
+            }
+          ]
         }
-      ]
-    }
-    });
+      });
   }
 }
