@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Cv } from '../model/cv';
+import { set } from 'immutable';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,7 @@ import { Cv } from '../model/cv';
 export class EmbaucheService {
   private embauchees: Cv[] = [];
 
-  constructor() {}
+  constructor() { }
 
   /**
    *

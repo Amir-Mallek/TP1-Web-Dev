@@ -1,12 +1,12 @@
 <div class="row">
-  @defer (on interaction) {
-<app-embauche></app-embauche>
-}
-@placeholder {
+  @defer (on viewport; prefetch when embauchees.length) {
+  <app-embauche></app-embauche>
+  }
+  @placeholder {
   <div class="alert alert-info mt-2">
-    La liste des embauchés sera chargée après interaction.
+    La liste des embauchés sera chargée.
   </div>
-}
+  }
   <div class="col">
     <div class="alert alert-warning">
       {{ date | date : "full" | uppercase }}
