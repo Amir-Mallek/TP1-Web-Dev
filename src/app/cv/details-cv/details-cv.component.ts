@@ -7,8 +7,9 @@ import { APP_ROUTES } from '../../../config/routes.config';
 import { AuthService } from '../../auth/services/auth.service';
 
 import { DefaultImagePipe } from '../pipes/default-image.pipe';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { catchError } from 'rxjs';
+import {rxResource, toSignal} from '@angular/core/rxjs-interop';
+import {catchError, map, of} from 'rxjs';
+import {httpResource} from "@angular/common/http";
 
 @Component({
     selector: 'app-details-cv',
@@ -23,29 +24,33 @@ export class DetailsCvComponent {
   private toastr = inject(ToastrService);
   authService = inject(AuthService);
 
-  id = this.activatedRoute.snapshot.params['id'];
-  // why this is better than subscribe + BehaviorSubject?
-  // 1. automatic unsubscription
-  // is it better than observable in change detection in this case?
-  // not really, but still better than subscribe + BehaviorSubject
-  // why not really?
-  // because the cv details component is recreated on each navigation
-  // so the automatic unsubscription is not that useful here
-  // but still, the signal provides a cleaner and more declarative way
-  // to handle the async data
-  cv = toSignal(
-    this.cvService.getCvById(+this.id).pipe(
-      catchError(() => {
+  private id = rxResource({
+    stream: () => this.activatedRoute.paramMap.pipe(
+      map(params => params.get('id'))
+    )
+  });
+
+  cv = rxResource({
+    params: () => this.id.value(),
+    stream: ({ params: id }) => {
+      if (!id) {
         this.router.navigate([APP_ROUTES.cv]);
-        return [null];
-      })
-    ),
-    { initialValue: null }
-  );
+        return of(null);
+      }
+
+      return this.cvService.getCvById(+id).pipe(
+        catchError(() => {
+          this.router.navigate([APP_ROUTES.cv]);
+          return of(null);
+        })
+      );
+    }
+  });
+
+
+
   constructor() {
-    effect(() => {
-      console.log('CV changed:', this.cv());
-    });
+
   }
   deleteCv(cv: Cv) {
     this.cvService.deleteCvById(cv.id).subscribe({

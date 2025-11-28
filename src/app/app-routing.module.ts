@@ -14,6 +14,7 @@ import { DetailsCvComponent } from './cv/details-cv/details-cv.component';
 import { RhComponent } from './optimizationPattern/rh/rh.component';
 import { TTCComponent } from './ttc/ttc.component';
 import {ProductsComponent} from "./products/products.component";
+import {MasterDetailsCvComponent} from "./cv/master-details-cv/master-details-cv";
 
 const routes: Route[] = [
   { path: 'login', component: LoginComponent },
@@ -21,7 +22,9 @@ const routes: Route[] = [
   { path: 'ttc', component: TTCComponent },
   {
     path: 'cv',
-    component: CvComponent,
+    // component: CvComponent,
+    component: MasterDetailsCvComponent,
+    children: [{ path: ':id', component: DetailsCvComponent }],
   },
   {
     path: 'products',

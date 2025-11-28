@@ -3,10 +3,17 @@
     <div class="alert alert-warning">
       {{ date | date : "full" | uppercase }}
     </div>
-    <app-list [cvs]="cvs()"></app-list>
+    @if (cvs.isLoading()) {
+      <p>Chargement...</p>
+    } @else if (cvs.hasValue()) {
+      <app-list [cvs]="cvs.value()"></app-list>
+    } @else if (cvs.error()) {
+      <p>Erreur de chargement</p>
+    }
   </div>
-  <div class="col">
-    <app-cv-card [cv]="selectedCv()"></app-cv-card>
-  </div>
+    <div class="col">
+      <app-cv-card [cv]="selectedCv()"></app-cv-card>
+    </div>
+
+  <app-embauche></app-embauche>
 </div>
-<app-embauche></app-embauche>
