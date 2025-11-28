@@ -1,4 +1,12 @@
 <div class="row">
+  @defer (on interaction) {
+<app-embauche></app-embauche>
+}
+@placeholder {
+  <div class="alert alert-info mt-2">
+    La liste des embauchés sera chargée après interaction.
+  </div>
+}
   <div class="col">
     <div class="alert alert-warning">
       {{ date | date : "full" | uppercase }}
@@ -9,4 +17,3 @@
     <app-cv-card [cv]="selectedCv$ | async"></app-cv-card>
   </div>
 </div>
-<app-embauche></app-embauche>

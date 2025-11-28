@@ -17,6 +17,7 @@ export class EmbaucheService {
    *
    */
   getEmbauchees(): Cv[] {
+    console.log('list of embauchees requested', this.embauchees);
     return this.embauchees;
   }
 
