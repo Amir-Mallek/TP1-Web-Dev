@@ -52,6 +52,7 @@ import { ServiceWorkerModule } from "@angular/service-worker";
 import { AutocompleteComponent } from "./cv/autocomplete/autocomplete.component";
 import { SliderComponent } from "./rxjs/slider/slider.component";
 import { FibonacciPipe } from "./pipes/fibonacci.pipe";
+import { UserInputComponent } from "./optimizationPattern/user-input/user-input.component";
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { FibonacciPipe } from "./pipes/fibonacci.pipe";
     TestHttpComponent,
     RhComponent,
     UserListComponent,
+    UserInputComponent,
     ProductsComponent,
     FibonacciPipe,
   ],

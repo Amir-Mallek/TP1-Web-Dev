@@ -9,7 +9,7 @@ export class FibonacciPipe implements PipeTransform {
 
   @memo()
   fibonnaci(n: number): number {
-    console.log("calculating this for the first time: ", n);
+    console.log("awel w ekher marra: ", n);
 
     if (n == 1 || n == 0) {
       return 1;
