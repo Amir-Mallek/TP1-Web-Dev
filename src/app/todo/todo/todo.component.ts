@@ -8,8 +8,7 @@ import { FormsModule } from '@angular/forms';
     templateUrl: './todo.component.html',
     styleUrls: ['./todo.component.css'],
     providers: [TodoService],
-    standalone: true,
-    imports: [FormsModule],
+    imports: [FormsModule]
 })
 export class TodoComponent {
   name = signal('');

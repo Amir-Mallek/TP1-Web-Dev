@@ -6,8 +6,7 @@ import { RainbowDirective } from "src/app/directives/rainbow.directive";
     selector: "app-color",
     templateUrl: "./color.component.html",
     styleUrls: ["./color.component.css"],
-    standalone: true,
-    imports: [RainbowDirective],
+    imports: [RainbowDirective]
 })
 export class ColorComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);

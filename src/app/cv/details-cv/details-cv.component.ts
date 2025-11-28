@@ -11,11 +11,10 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError } from 'rxjs';
 
 @Component({
-  selector: 'app-details-cv',
-  templateUrl: './details-cv.component.html',
-  styleUrls: ['./details-cv.component.css'],
-  standalone: true,
-  imports: [DefaultImagePipe],
+    selector: 'app-details-cv',
+    templateUrl: './details-cv.component.html',
+    styleUrls: ['./details-cv.component.css'],
+    imports: [DefaultImagePipe]
 })
 export class DetailsCvComponent {
   private cvService = inject(CvService);

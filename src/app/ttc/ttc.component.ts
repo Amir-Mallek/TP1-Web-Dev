@@ -8,11 +8,10 @@ import {
 import { DecimalPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-ttc',
-  standalone: true,
-  imports: [DecimalPipe],
-  templateUrl: './ttc.component.html',
-  styleUrl: './ttc.component.css',
+    selector: 'app-ttc',
+    imports: [DecimalPipe],
+    templateUrl: './ttc.component.html',
+    styleUrl: './ttc.component.css'
 })
 export class TTCComponent {
   PriceHT: WritableSignal<number> = signal(0);

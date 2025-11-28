@@ -13,15 +13,14 @@ import { Settings } from "./dto/product-settings.dto";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 
 @Component({
-  selector: "app-products",
-  templateUrl: "./products.component.html",
-  styleUrls: ["./products.component.css"],
-  imports: [
-    NgForOf,
-    AsyncPipe,
-    NgIf
-  ],
-  standalone: true
+    selector: "app-products",
+    templateUrl: "./products.component.html",
+    styleUrls: ["./products.component.css"],
+    imports: [
+        NgForOf,
+        AsyncPipe,
+        NgIf
+    ]
 })
 export class ProductsComponent {
 
